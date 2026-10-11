@@ -83,13 +83,3 @@ ip link show                                     # br-xxxx (red del compose), do
   ```
 - **`docker compose down` tarda unos 10 s en `nodo_web`.** Python corre como PID 1 y no instala un manejador para SIGTERM, así que el kernel ignora la señal. Docker espera 10 s y termina el proceso con SIGKILL, y el contenedor sale con código **137** (128 + 9). Con `init: true` en el servicio (o `docker run --init`), `tini` es el PID 1 y reenvía la señal: el contenedor se detiene al instante con código **143** (128 + 15). El script `validacion.sh` lo mide al final.
 
-## Subir a GitHub
-
-```bash
-git init
-git add .
-git commit -m "Pre-Laboratorio 7: Dockerfile, docker-compose y validación"
-git branch -M main
-git remote add origin https://github.com/<tu-usuario>/<tu-repositorio>.git
-git push -u origin main
-```
